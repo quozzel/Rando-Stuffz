@@ -1,0 +1,1172 @@
+{
+    "Definitions": {
+        "Types": {
+            "0": "None: No type is assigned.",
+            "1": "Object: Represents an object reference.",
+            "2": "String: Represents a string value.",
+            "3": "Int32: Represents a 32-bit integer.",
+            "4": "Float: Represents a floating-point number.",
+            "5": "Bool: Represents a boolean value.",
+            "6": "Variable: Represents a variable type.",
+            "7": "Struct: Represents a structure."
+        },
+        "Flags": {
+            "0": "Local: The script is local.",
+            "1": "Inherited: The script is inherited.",
+            "2": "Removed: The script has been removed.",
+            "3": "Inherited and Removed: The script is inherited and removed."
+        }
+    },
+    "TES5Edit Global Variables": {
+        "DataPath": {
+            "Type": "string",
+            "Description": "The path to the data directory of the currently loaded game."
+        },
+        "ProgramPath": {
+            "Type": "string",
+            "Description": "The path to the directory where the TES5Edit executable is located."
+        },
+        "ScriptsPath": {
+            "Type": "string",
+            "Description": "The path to the directory where TES5Edit scripts are located."
+        },
+        "FileCount": {
+            "Type": "integer",
+            "Description": "The number of files loaded in TES5Edit."
+        },
+        "wbAppName": {
+            "Type": "string",
+            "Description": "The name of the application, typically 'TES5Edit'."
+        },
+        "wbVersionNumber": {
+            "Type": "string",
+            "Description": "The version number of the TES5Edit application."
+        }
+    },
+    "Global Functions": {
+        "AddMessage": {
+            "Returns": "void",
+            "Arguments": "asMessage: string",
+            "Description": "Pushes a line to TES5Edit's Information tab."
+        },
+        "Assigned": {
+            "Returns": "boolean",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns true if aeElement is not Nil, and returns false otherwise."
+        },
+        "ObjectToElement": {
+            "Returns": "IInterface",
+            "Arguments": "akObject",
+            "Description": "Retrieves an object from a list where it was stored as an IInterface."
+        },
+        "FileByIndex": {
+            "Returns": "IwbFile",
+            "Arguments": "aiFile: integer",
+            "Description": "Returns a file by index. 0 is Fallout4.esm, 1 is Fallout4.exe, etc."
+        },
+        "FileByLoadOrder": {
+            "Returns": "IwbFile",
+            "Arguments": "aiLoadOrder: integer",
+            "Description": "Returns a file by load order. 0 is Fallout4.esm, 1 is DLC or first mod loaded."
+        },
+        "FullPathToFilename": {
+            "Returns": "string",
+            "Arguments": "asFilename: string",
+            "Description": "Returns the full path to the filename asFilename."
+        },
+        "EnableSkyrimSaveFormat": {
+            "Returns": "void",
+            "Arguments": "None",
+            "Description": "May corrupt saved plugins until xEdit is restarted (use with caution)."
+        },
+        "GetRecordDefNames": {
+            "Returns": "void",
+            "Arguments": "akList: TStrings",
+            "Description": "Modifies akList by adding entries based on wbRecordDefs."
+        },
+        "wbFilterStrings": {
+            "Returns": "void",
+            "Arguments": "akListIn: TStrings; akListOut: TStrings; asFilter: String",
+            "Description": "Adds entries from akListIn to akListOut that contain asFilter."
+        },
+        "wbRemoveDuplicateStrings": {
+            "Returns": "void",
+            "Arguments": "akList: TStringList",
+            "Description": "Modifies akList, removing duplicate entries."
+        }
+    },
+    "IwbElement Functions": {
+        "BaseName": {
+            "Returns": "string",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Identical to Name except that it handles IwbFiles differently."
+        },
+        "BeginUpdate": {
+            "Returns": "void",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "For use on container elements only when performing a lot of operations. Needs to be paired with EndUpdate."
+        },
+        "BuildRef": {
+            "Returns": "void",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Builds reference information for the element and all of its descendants."
+        },
+        "CanContainFormIDs": {
+            "Returns": "boolean",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Guaranteed to return True if the element can contain FormIDs, but not guaranteed to return False if it can't."
+        },
+        "CanMoveDown": {
+            "Returns": "boolean",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns true if the element is part of an array and can be moved further down using MoveDown."
+        },
+        "CanMoveUp": {
+            "Returns": "boolean",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns true if the element is part of an array and can be moved further up using MoveUp."
+        },
+        "Check": {
+            "Returns": "string",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns the error message produced when the 'Check for Errors' functionality is run on aeElement; or else an empty string if no error is found."
+        },
+        "ClearElementState": {
+            "Returns": "void",
+            "Arguments": "aeElement: IwbElement; aiState: TwbElementState",
+            "Description": "Manipulates the internal flags of an element. See also: GetElementState, SetElementState."
+        },
+        "ContainingMainRecord": {
+            "Returns": "IwbMainRecord",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns the main record that contains the element."
+        },
+        "DefType": {
+            "Returns": "TwbDefType",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns the def-type of the element."
+        },
+        "DisplayName": {
+            "Returns": "string",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns the display name of the element, if it has one; otherwise, behaves identically to Name."
+        },
+        "ElementAssign": {
+            "Returns": "IwbElement",
+            "Arguments": "aeContainer: IwbContainer; aiIndex: integer; aeSource: IwbElement; abOnlySK: boolean",
+            "Description": "Copy the contents of one element into a container element, or create and append an element to a container."
+        },
+        "ElementType": {
+            "Returns": "TwbElementType",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns the type of the element."
+        },
+        "EndUpdate": {
+            "Returns": "void",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "For use on container elements only when performing a lot of operations. Needs to be paired with BeginUpdate."
+        },
+        "EnumValues": {
+            "Returns": "string",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "If aeElement is a set of named enum values, returns the names of any values that have been set, separated with spaces."
+        },
+        "Equals": {
+            "Returns": "boolean",
+            "Arguments": "aeElement1: IwbElement; aeElement2: IwbElement",
+            "Description": "Compares two elements by their ElementID."
+        },
+        "FlagValues": {
+            "Returns": "string",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "If aeElement is a set of flags, returns the names of all set flags, separated with spaces."
+        },
+        "FullPath": {
+            "Returns": "string",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns the full path to the element, going all the way down to its containing file."
+        },
+        "GetContainer": {
+            "Returns": "IwbContainer",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns the element's container."
+        },
+        "GetEditValue": {
+            "Returns": "string",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns a string representation of the element's value."
+        },
+        "GetElementState": {
+            "Returns": "TwbElementState",
+            "Arguments": "aeElement: IwbElement; aiState: TwbElementState",
+            "Description": "Checks the internal flags of an element."
+        },
+        "GetFile": {
+            "Returns": "IwbFile",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns the file that contains the element."
+        },
+        "GetNativeValue": {
+            "Returns": "variant",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns the element's value."
+        },
+        "IsEditable": {
+            "Returns": "boolean",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns true if the record can be edited."
+        },
+        "IsInjected": {
+            "Returns": "boolean",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns true if the element is an injected record."
+        },
+        "LinksTo": {
+            "Returns": "IwbElement",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Obtains the referenced element."
+        },
+        "MarkModifiedRecursive": {
+            "Returns": "void",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Marks the element and all of its descendants as modified."
+        },
+        "MoveDown": {
+            "Returns": "void",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Moves the element down by one slot if part of an array."
+        },
+        "MoveUp": {
+            "Returns": "void",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Moves the element up by one slot if part of an array."
+        },
+        "Name": {
+            "Returns": "string",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns the name of the element, if it has one."
+        },
+        "Path": {
+            "Returns": "string",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns the path component of aeElement."
+        },
+        "PathName": {
+            "Returns": "string",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Similar to FullPath except that names in the path are prefixed with brackets."
+        },
+        "Remove": {
+            "Returns": "void",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Removes the element from its file."
+        },
+        "ReportRequiredMasters": {
+            "Returns": "void",
+            "Arguments": "aeElement: IwbElement; akListOut: TStrings; akUnknown1: boolean; akUnknown2: boolean",
+            "Description": "Checks which master files aeElement depends on, and adds their filenames to akListOut."
+        },
+        "SetEditValue": {
+            "Returns": "string",
+            "Arguments": "aeElement: IwbElement; asValue: string",
+            "Description": "Sets the element's value to one that matches the string representation passed in."
+        },
+        "SetElementState": {
+            "Returns": "TwbElementState",
+            "Arguments": "aeElement: IwbElement; aiState: TwbElementState",
+            "Description": "Manipulates the internal flags of an element."
+        },
+        "SetNativeValue": {
+            "Returns": "string",
+            "Arguments": "aeElement: IwbElement; avValue: variant",
+            "Description": "Sets the element's value."
+        },
+        "SetToDefault": {
+            "Returns": "void",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Resets the element's data and adds missing fields if any."
+        },
+        "ShortName": {
+            "Returns": "string",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Generally the same as Name unless aeElement is a reference, cell, or similar record."
+        },
+        "SortKey": {
+            "Returns": "string",
+            "Arguments": "aeElement: IwbElement",
+            "Description": "Returns a string unique to the element entered."
+        },
+        "wbCopyElementToFile": {
+            "Returns": "IwbElement",
+            "Arguments": "aeElement: IwbElement; aeFile: IwbFile; abAsNew: boolean; abDeepCopy: boolean",
+            "Description": "Copies an element to the specified file."
+        },
+        "wbCopyElementToFileWithPrefix": {
+            "Returns": "IwbElement",
+            "Arguments": "aeElement: IwbElement; aeFile: IwbFile; abAsNew: boolean; abDeepCopy: boolean; aPrefixRemove; aPrefix; aSuffix: string",
+            "Description": "Details unknown. Returns the copied element."
+        },
+        "wbCopyElementToRecord": {
+            "Returns": "IwbElement",
+            "Arguments": "aeElement: IwbElement; aeRecord: IwbMainRecord; abAsNew: boolean; abDeepCopy: boolean",
+            "Description": "Copies an element to a record."
+        }
+    },
+    "IwbContainer Functions": {
+        "Add": {
+            "Returns": "IwbElement",
+            "Arguments": "aeContainer: IwbContainer; asNameOrSignature: string; abSilent: boolean",
+            "Description": "Creates a child element with the name-or-signature asNameOrSignature in aeContainer if no such child already exists."
+        },
+        "AddElement": {
+            "Returns": "void",
+            "Arguments": "aeContainer: IwbContainer; aeElement: IwbElement",
+            "Description": "Adds aeElement as a child of aeContainer. Throws an error if aeElement already has a container."
+        },
+        "AdditionalElementCount": {
+            "Returns": "integer",
+            "Arguments": "aeContainer: IwbContainer",
+            "Description": "Returns the number of 'fake' elements xEdit adds before the 'Record Header'."
+        },
+        "ContainerStates": {
+            "Returns": "byte",
+            "Arguments": "aeContainer: IwbContainer",
+            "Description": "Returns the internal container flags for aeContainer."
+        },
+        "ElementByIndex": {
+            "Returns": "IwbElement",
+            "Arguments": "aeContainer: IwbContainer; aiIndex: integer",
+            "Description": "Returns the aiIndex-th child element in aeContainer."
+        },
+        "ElementByName": {
+            "Returns": "IwbElement",
+            "Arguments": "aeContainer: IwbContainer; asName: string",
+            "Description": "Searches aeContainer for the child element with name asName, and returns the found element or Nil."
+        },
+        "ElementByPath": {
+            "Returns": "IwbElement",
+            "Arguments": "aeContainer: IwbContainer; asPath: string",
+            "Description": "Searches aeContainer for the descendant element specified by path asPath, and returns the found element or Nil."
+        },
+        "ElementBySignature": {
+            "Returns": "IwbElement",
+            "Arguments": "aeContainer: IwbContainer; asSignature: string",
+            "Description": "Searches aeContainer for the child element with signature asSignature, and returns the found element or Nil."
+        },
+        "ElementCount": {
+            "Returns": "integer",
+            "Arguments": "aeContainer: IwbContainer",
+            "Description": "Returns the number of child elements in aeContainer."
+        },
+        "ElementExists": {
+            "Returns": "boolean",
+            "Arguments": "aeContainer: IwbContainer; asName: string",
+            "Description": "Returns true if aeContainer has a child element whose name is asName."
+        },
+        "GetElementEditValues": {
+            "Returns": "string",
+            "Arguments": "aeContainer: IwbContainer; asPath: string",
+            "Description": "Finds the element within aeContainer specified by asPath, and returns a string representation of its value."
+        },
+        "GetElementNativeValues": {
+            "Returns": "variant",
+            "Arguments": "aeContainer: IwbContainer; asPath: string",
+            "Description": "Finds the element within aeContainer specified by asPath, and returns its value."
+        },
+        "IndexOf": {
+            "Returns": "integer",
+            "Arguments": "aeContainer: IwbContainer; aeChild: IwbElement",
+            "Description": "Returns the index of aeChild in aeContainer, or -1 if aeChild is not a child element of aeContainer."
+        },
+        "InsertElement": {
+            "Returns": "void",
+            "Arguments": "aeContainer: IwbContainer; aiPosition: Integer; aeElement: IwbElement",
+            "Description": "Inserts aeElement as a child of aeContainer at the specified position."
+        },
+        "IsSorted": {
+            "Returns": "boolean",
+            "Arguments": "aeContainer: IwbSortableContainer",
+            "Description": "Checks whether xEdit always keeps aeContainer sorted."
+        },
+        "LastElement": {
+            "Returns": "IwbElement",
+            "Arguments": "aeContainer: IwbContainer",
+            "Description": "Returns the last child element in aeContainer, or Nil if there are no child elements."
+        },
+        "RemoveByIndex": {
+            "Returns": "IwbElement",
+            "Arguments": "aeContainer: IwbContainer; aiIndex: integer; abMarkModified: boolean",
+            "Description": "Removes the aiIndex-th child from aeContainer, and returns it."
+        },
+        "RemoveElement": {
+            "Returns": "IwbElement",
+            "Arguments": "aeContainer: IwbContainer; avChild: variant",
+            "Description": "Removes avChild from aeContainer and returns the removed element."
+        },
+        "ReverseElements": {
+            "Returns": "void",
+            "Arguments": "aeContainer: IwbContainer",
+            "Description": "Reverses the order of the child elements in aeContainer."
+        },
+        "SetElementEditValues": {
+            "Returns": "void",
+            "Arguments": "aeContainer: IwbContainer; asPath: string; asValue: string",
+            "Description": "Finds the element within aeContainer specified by asPath, and sets its value based on the string representation asValue."
+        },
+        "SetElementNativeValues": {
+            "Returns": "void",
+            "Arguments": "aeContainer: IwbContainer; asPath: string; asValue: variant",
+            "Description": "Finds the element within aeContainer specified by asPath, and sets its value to asValue."
+        }
+    },
+    "IwbFile Functions": {
+        "AddMasterIfMissing": {
+            "Returns": "void",
+            "Arguments": "aeFile: IwbFile; asMasterFilename: string",
+            "Description": "Adds the specified file as a master for aeFile, if it isn't already a master."
+        },
+        "AddNewFileName": {
+            "Returns": "IwbFile",
+            "Arguments": "FileName: String (optional); ESLFlag: Boolean",
+            "Description": "Creates a new, empty plugin using FileName as the name in the game's plugin folder (Data) and adds it to the end of the plugins list."
+        },
+        "AddNewFile": {
+            "Returns": "IwbFile",
+            "Arguments": "ESLFlag: Boolean (optional)",
+            "Description": "Creates a new, empty plugin in the game's plugin folder (Data) and adds it to the end of the plugins list."
+        },
+        "CleanMasters": {
+            "Returns": "void",
+            "Arguments": "aeFile: IwbFile",
+            "Description": "Finds unnecessary files in aeFile's master list and removes them, updating all form indices accordingly."
+        },
+        "FileFormIDtoLoadOrderFormID": {
+            "Returns": "cardinal",
+            "Arguments": "aeFile: IwbFile; aiFormID: cardinal",
+            "Description": "Converts aiFormID from a FormID relative to aeFile's master list to a load order-relative FormID."
+        },
+        "FileWriteToStream": {
+            "Returns": "void",
+            "Arguments": "aeFile: IwbFile; akOutStream: TStream",
+            "Description": "Writes the contents of aeFile to akOutStream."
+        },
+        "GetFileName": {
+            "Returns": "string",
+            "Arguments": "aeFile: IwbFile",
+            "Description": "Returns aeFile's filename."
+        },
+        "GetIsESM": {
+            "Returns": "boolean",
+            "Arguments": "aeFile: IwbFile",
+            "Description": "Returns True if aeFile is flagged as an ESM."
+        },
+        "GetLoadOrder": {
+            "Returns": "integer",
+            "Arguments": "aeFile: IwbFile",
+            "Description": "Returns aeFile's index in the load order, or -1 if called on something that is not an IwbFile."
+        },
+        "GetNewFormID": {
+            "Returns": "cardinal",
+            "Arguments": "aeFile: IwbFile",
+            "Description": "Returns a new FormID, the same way that Add(..., ..., True) does."
+        },
+        "GroupBySignature": {
+            "Returns": "IwbGroupRecord",
+            "Arguments": "aeFile: IwbFile; asSignature: string",
+            "Description": "If aeFile has a top-level group with the specified signature, that group is returned."
+        },
+        "HasGroup": {
+            "Returns": "boolean",
+            "Arguments": "aeFile: IwbFile; asSignature: string",
+            "Description": "Returns True if aeFile contains a top-level group with the specified signature."
+        },
+        "HasMaster": {
+            "Returns": "boolean",
+            "Arguments": "aeFile: IwbFile; asMasterFilename: string",
+            "Description": "Returns True if aeFile has a file with the name asMasterFilename as a master."
+        },
+        "LoadOrderFormIDtoFileFormID": {
+            "Returns": "cardinal",
+            "Arguments": "aeFile: IwbFile; aiFormID: cardinal",
+            "Description": "Converts aiFormID from a load order-relative FormID to a FormID relative to aeFile's master list."
+        },
+        "MasterByIndex": {
+            "Returns": "IwbFile",
+            "Arguments": "aeFile: IwbFile; aiIndex: integer",
+            "Description": "Returns the aiIndex-th master file for aeFile."
+        },
+        "MasterCount": {
+            "Returns": "cardinal",
+            "Arguments": "aeFile: IwbFile",
+            "Description": "Returns the number of master files that aeFile has."
+        },
+        "RecordByEditorID": {
+            "Returns": "IwbMainRecord",
+            "Arguments": "aeFile: IwbFile; asEditorID: string",
+            "Description": "Returns the Magic Effect (MGEF) or Setting (GMST) record in aeFile that has the specified EditorID."
+        },
+        "RecordByFormID": {
+            "Returns": "IwbMainRecord",
+            "Arguments": "aeFile: IwbFile; aiFormID: integer; abAllowInjected: boolean",
+            "Description": "Returns the main record in aeFile that has the specified FormID, or Nil if no records match."
+        },
+        "RecordByIndex": {
+            "Returns": "IwbMainRecord",
+            "Arguments": "aeFile: IwbFile; aiIndex: integer",
+            "Description": "Returns the aiIndex-th record in aeFile."
+        },
+        "RecordCount": {
+            "Returns": "cardinal",
+            "Arguments": "aeFile: IwbFile",
+            "Description": "Returns the number of records that aeFile has."
+        },
+        "SetIsESM": {
+            "Returns": "void",
+            "Arguments": "aeFile: IwbFile; abFlag: boolean",
+            "Description": "Modifies the ESM flag for aeFile."
+        },
+        "SortMasters": {
+            "Returns": "void",
+            "Arguments": "aeFile: IwbFile",
+            "Description": "Attempts to sort the masters for aeFile by their place in the current load order."
+        }
+    },
+    "IwbMainRecord Functions": {
+        "BaseRecord": {
+            "Returns": "IwbMainRecord",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "If aeRecord is a Reference, returns the IwbMainRecord of its base form."
+        },
+        "BaseRecordID": {
+            "Returns": "cardinal",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Returns the load order-relative FormID of aeRecord."
+        },
+        "ChangeFormSignature": {
+            "Returns": "void",
+            "Arguments": "aeRecord: IwbMainRecord; asNewSignature: string",
+            "Description": "Changes aeRecord's signature to asNewSignature."
+        },
+        "ChildGroup": {
+            "Returns": "IwbGroupRecord",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Returns the group that aeRecord contains, if any."
+        },
+        "CompareExchangeFormID": {
+            "Returns": "boolean",
+            "Arguments": "aeRecord: IwbMainRecord; aiOldFormID: cardinal; aiNewFormID: cardinal",
+            "Description": "Attempts to change aeRecord's FormID from aiOldFormID to aiNewFormID."
+        },
+        "EditorID": {
+            "Returns": "string",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Returns the record's EditorID."
+        },
+        "FixedFormID": {
+            "Returns": "cardinal",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Returns the local FormID of the record."
+        },
+        "FormID": {
+            "Returns": "cardinal",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Returns the record's FormID."
+        },
+        "GetFormVCS1": {
+            "Returns": "cardinal",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Returns the value of the Version Control Info 1 field."
+        },
+        "GetFormVCS2": {
+            "Returns": "cardinal",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Returns the value of the Version Control Info 2 field."
+        },
+        "GetFormVersion": {
+            "Returns": "cardinal",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Get Form Version field from the record's header."
+        },
+        "GetGridCell": {
+            "Returns": "TwbGridCell",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "If aeRecord is an exterior Cell (CELL), returns its grid coordinates."
+        },
+        "GetIsDeleted": {
+            "Returns": "boolean",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Checks the record's 'deleted' flag."
+        },
+        "GetIsInitiallyDisabled": {
+            "Returns": "boolean",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Checks the record's 'initially disabled' flag."
+        },
+        "GetIsPersistent": {
+            "Returns": "boolean",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Checks the record's 'persistent' flag."
+        },
+        "GetIsVisibleWhenDistant": {
+            "Returns": "boolean",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Checks the record's 'visible when distant' flag."
+        },
+        "GetLoadOrderFormID": {
+            "Returns": "cardinal",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Returns the record's FormID relative to the current load order."
+        },
+        "GetPosition": {
+            "Returns": "TwbVector",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "If aeRecord is a Reference, returns its position."
+        },
+        "GetRotation": {
+            "Returns": "TwbVector",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "If aeRecord is a Reference, returns its rotation."
+        },
+        "HasPrecombinedMesh": {
+            "Returns": "boolean",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Checks whether aeRecord is a Fallout 4 Reference that has precombined mesh data generated."
+        },
+        "HighestOverrideOrSelf": {
+            "Returns": "IwbMainRecord",
+            "Arguments": "aeRecord: IwbMainRecord; aiMaxIndex: integer",
+            "Description": "If aeRecord is overridden, returns the highest override."
+        },
+        "IsMaster": {
+            "Returns": "boolean",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Returns True if aeRecord is a master."
+        },
+        "IsWinningOverride": {
+            "Returns": "boolean",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Returns True if aeRecord is the last loaded override for its master."
+        },
+        "Master": {
+            "Returns": "IwbMainRecord",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Returns the master record that aeRecord overrides."
+        },
+        "MasterOrSelf": {
+            "Returns": "IwbMainRecord",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "If aeRecord is an override, returns the master record that it overrides."
+        },
+        "OverrideByIndex": {
+            "Returns": "IwbMainRecord",
+            "Arguments": "aeRecord: IwbMainRecord; aiIndex: integer",
+            "Description": "Returns the aiIndex-th override of aeRecord."
+        },
+        "OverrideCount": {
+            "Returns": "cardinal",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Returns the number of records that override aeRecord."
+        },
+        "PrecombinedMesh": {
+            "Returns": "string",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Returns the path to aeRecord's precombined mesh file."
+        },
+        "ReferencedByIndex": {
+            "Returns": "IwbMainRecord",
+            "Arguments": "aeRecord: IwbMainRecord; aiIndex: integer",
+            "Description": "Returns the aiIndex-th record that references aeRecord."
+        },
+        "ReferencedByCount": {
+            "Returns": "cardinal",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Returns the number of records that refer to aeRecord."
+        },
+        "SetEditorID": {
+            "Returns": "string",
+            "Arguments": "aeRecord: IwbMainRecord; asEditorID: string",
+            "Description": "Sets the record's EditorID."
+        },
+        "SetFormVersion": {
+            "Returns": "void",
+            "Arguments": "aeRecord: IwbMainRecord; aiVersion: cardinal",
+            "Description": "Set Form Version field for the record's header."
+        },
+        "SetIsDeleted": {
+            "Returns": "boolean",
+            "Arguments": "aeRecord: IwbMainRecord; abFlag: boolean",
+            "Description": "Modifies the record's 'deleted' flag."
+        },
+        "SetIsInitiallyDisabled": {
+            "Returns": "boolean",
+            "Arguments": "aeRecord: IwbMainRecord; abFlag: boolean",
+            "Description": "Modifies the record's 'initially disabled' flag."
+        },
+        "SetIsPersistent": {
+            "Returns": "boolean",
+            "Arguments": "aeRecord: IwbMainRecord; abFlag: boolean",
+            "Description": "Modifies the record's 'persistent' flag."
+        },
+        "SetIsVisibleWhenDistant": {
+            "Returns": "boolean",
+            "Arguments": "aeRecord: IwbMainRecord; abFlag: boolean",
+            "Description": "Modifies the record's 'visible when distant' flag."
+        },
+        "SetLoadOrderFormID": {
+            "Returns": "cardinal",
+            "Arguments": "aeRecord: IwbMainRecord; aiFormID: cardinal",
+            "Description": "Modifies the record's FormID, with the specified ID relative to the current load order."
+        },
+        "SetFormVCS1": {
+            "Returns": "void",
+            "Arguments": "aeRecord: IwbMainRecord; aiValue: cardinal",
+            "Description": "Modifies the Version Control Info 1 field."
+        },
+        "SetFormVCS2": {
+            "Returns": "void",
+            "Arguments": "aeRecord: IwbMainRecord; aiValue: cardinal",
+            "Description": "Modifies the Version Control Info 2 field."
+        },
+        "Signature": {
+            "Returns": "string",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Returns the record's signature."
+        },
+        "UpdateRefs": {
+            "Returns": "void",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Appears to be the same as BuildRef, except that it aborts if references are already in the middle of being built."
+        },
+        "WinningOverride": {
+            "Returns": "IwbMainRecord",
+            "Arguments": "aeRecord: IwbMainRecord",
+            "Description": "Returns the last loaded override for aeRecord."
+        }
+    },
+    "IwbGroupRecord Functions": {
+        "ChildrenOf": {
+            "Returns": "IwbMainRecord",
+            "Arguments": "aeGroup: IwbGroupRecord",
+            "Description": "If aeGroup is a child group, returns the main record that it is associated with."
+        },
+        "FindChildGroup": {
+            "Returns": "IwbGroupRecord",
+            "Arguments": "aeGroup: IwbGroupRecord; aiType: integer; aeMainRecord: IwbMainRecord",
+            "Description": "Finds the group record inside another group."
+        },
+        "GroupLabel": {
+            "Returns": "cardinal",
+            "Arguments": "aeGroup: IwbGroupRecord",
+            "Description": "Returns the raw group label, as specified in the file format."
+        },
+        "GroupType": {
+            "Returns": "integer",
+            "Arguments": "aeGroup: IwbGroupRecord",
+            "Description": "Returns the raw group type, as specified in the file format."
+        },
+        "MainRecordByEditorID": {
+            "Returns": "IwbMainRecord",
+            "Arguments": "aeGroup: IwbGroupRecord; asEditorID: string",
+            "Description": "Searches aeGroup for a main record whose EditorID is asEditorID and returns the matching record or Nil."
+        }
+    },
+    "IwbResource Functions": {
+        "ResourceContainerList": {
+            "Returns": "void",
+            "Arguments": "akContainers: TwbFastStringList",
+            "Description": "Fills akContainers with the full filenames (directory + name) of all loaded BSA and BA2 files, as well as the name of the Data directory."
+        },
+        "ResourceCopy": {
+            "Returns": "void",
+            "Arguments": "asContainerName: string; asFilename: string; asPathOut: string",
+            "Description": "Retrieves the resource named asFilename from the resource container named asContainerName, and saves that resource to the specified file path asPathOut."
+        },
+        "ResourceCount": {
+            "Returns": "cardinal",
+            "Arguments": "asFilename: string; akContainers: TStrings",
+            "Description": "Fills akContainers with a list of the loaded containers (BSA, BA2, Data directory) that a file named asFilename appears in."
+        },
+        "ResourceExists": {
+            "Returns": "boolean",
+            "Arguments": "asFilename: string",
+            "Description": "Checks whether any loaded container has a file with the specified name."
+        },
+        "ResourceList": {
+            "Returns": "void",
+            "Arguments": "asContainerName: string; akContainers: TStrings",
+            "Description": "Accesses the container with the full filename asContainerName, and adds a list of all contained filenames to akContainers."
+        },
+        "ResourceOpenData": {
+            "Returns": "TBytesStream",
+            "Arguments": "asContainerName: string; asFilename: string",
+            "Description": "Opens the resource named asFilename from the resource container named asContainerName as a TBytesStream."
+        }
+    },
+    "Misc Functions": {
+        "LocalizationGetStringsFromFile": {
+            "Returns": "void",
+            "Arguments": "asFilename: string; akListOut: TStrings",
+            "Description": "Fills akListOut with localized strings from asFilename."
+        },
+        "wbAlphaBlend": {
+            "Returns": "boolean",
+            "Arguments": "akDestinationDeviceContext: unknown; aiDestinationX: integer; aiDestinationY: integer; aiDestinationWidth: integer; aiDestinationHeight: integer; akSourceDeviceContext: unknown; aiSourceX: integer; aiSourceY: integer; aiSourceWidth: integer; aiSourceHeight: integer; aiAlpha: integer",
+            "Description": "A wrapper for Windows.AlphaBlend which returns its result."
+        },
+        "wbBlockFromSubBlock": {
+            "Returns": "TwbGridCell",
+            "Arguments": "akSubBlock: TwbGridCell",
+            "Description": "Returns a TwbGridCell object corresponding to the block that contains akSubBlock."
+        },
+        "wbCRC32Data": {
+            "Returns": "cardinal",
+            "Arguments": "akData: TBytes",
+            "Description": "Calculates the CRC32 checksum of akData."
+        },
+        "wbCRC32File": {
+            "Returns": "cardinal",
+            "Arguments": "asFilename: string",
+            "Description": "Calculates the CRC32 checksum of the file specified by asFilename."
+        },
+        "wbCRC32Resource": {
+            "Returns": "cardinal",
+            "Arguments": "asContainerName: string; asFileName: string",
+            "Description": "Calculates the CRC32 checksum of the resource specified by asFileName in the container asContainerName."
+        },
+        "wbFindREFRsByBase": {
+            "Returns": "void",
+            "Arguments": "aeREFR: IwbMainRecord; asSignatures: string; aiFlags: integer; akOutList: TList",
+            "Description": "Searches for sibling records to aeREFR whose base records' signatures match asSignatures, and adds them to akOutList."
+        },
+        "wbFlipBitmap": {
+            "Returns": "void",
+            "Arguments": "akBitmap: TBitmap; aiAxes: integer",
+            "Description": "Flips the image data contained in akBitmap based on the specified axes."
+        },
+        "wbGetSiblingRecords": {
+            "Returns": "void",
+            "Arguments": "aeRecord: IwbElement; asSignatures: string; abIncludeOverrides: boolean; akOutList: TList",
+            "Description": "Adds sibling records of aeRecord to akOutList if their signatures match asSignatures."
+        },
+        "wbGridCellToGroupLabel": {
+            "Returns": "cardinal",
+            "Arguments": "akGridCell: TwbGridCell",
+            "Description": "Returns an integer of the format 0xXXXXYYYY."
+        },
+        "wbIsInGridCell": {
+            "Returns": "boolean",
+            "Arguments": "akPosition: TwbVector; akGridCell: TwbGridCell",
+            "Description": "Checks if akPosition is in akGridCell."
+        },
+        "wbMD5Data": {
+            "Returns": "cardinal",
+            "Arguments": "akData: TBytes",
+            "Description": "Calculates the MD5 checksum of akData."
+        },
+        "wbMD5File": {
+            "Returns": "cardinal",
+            "Arguments": "asFilename: string",
+            "Description": "Calculates the MD5 checksum of the file specified by asFilename."
+        },
+        "wbNormalizeResourceName": {
+            "Returns": "string",
+            "Arguments": "asResourceName: string; akResourceType: TGameResourceType",
+            "Description": "Normalizes the resource name asResourceName."
+        },
+        "wbPositionToGridCell": {
+            "Returns": "TwbGridCell",
+            "Arguments": "akPosition: TwbVector",
+            "Description": "Converts akPosition to grid coordinates."
+        },
+        "wbSHA1Data": {
+            "Returns": "cardinal",
+            "Arguments": "akData: TBytes",
+            "Description": "Calculates the SHA1 checksum of akData."
+        },
+        "wbSHA1File": {
+            "Returns": "cardinal",
+            "Arguments": "asFilename: string",
+            "Description": "Calculates the SHA1 checksum of the file specified by asFilename."
+        },
+        "wbStringListInString": {
+            "Returns": "integer",
+            "Arguments": "akList: TStringList; asSubstring: string",
+            "Description": "Checks if any of the strings in akList contains asSubstring."
+        },
+        "wbSubBlockFromGridCell": {
+            "Returns": "TwbGridCell",
+            "Arguments": "akGridCell: TwbGridCell",
+            "Description": "Returns a TwbGridCell object corresponding to the sub-block that contains akGridCell."
+        }
+    },
+    "NIF Functions": {
+        "NifBlockList": {
+            "Returns": "boolean",
+            "Arguments": "akData: TBytes; akListOut: TStrings",
+            "Description": "Retrieves block information from the NIF file in akData, and adds it to akListOut."
+        },
+        "NifTextureList": {
+            "Returns": "boolean",
+            "Arguments": "akData: TBytes; akListOut: TStrings",
+            "Description": "Searches the NIF file in akData for all texture paths, and adds them to akListOut."
+        },
+        "NifTextureListResource": {
+            "Returns": "boolean",
+            "Arguments": "akData: variant; akListOut: TStrings",
+            "Description": "Searches the NIF file in akData for all texture paths, and adds them to akListOut."
+        },
+        "NifTextureListUVRange": {
+            "Returns": "boolean",
+            "Arguments": "akData: TBytes; afUVRange: Single; akListOut: TStrings",
+            "Description": "Searches the NIF file in akData for all texture paths, and adds them to akListOut if none of the relevant NiTriShape's UV sets have UVs greater than afUVRange or less than -afUVRange."
+        }
+    },
+    "DDS Functions": {
+        "wbDDSStreamToBitmap": {
+            "Returns": "boolean",
+            "Arguments": "akStream: TStream; akBitmapOut: TBitmap",
+            "Description": "Modifies akBitmapOut to contain the DDS information sourced from akStream."
+        },
+        "wbDDSDataToBitmap": {
+            "Returns": "boolean",
+            "Arguments": "akData: TBytes; akBitmapOut: TBitmap",
+            "Description": "Modifies akBitmapOut to contain the DDS information sourced from akData."
+        },
+        "wbDDSResourceToBitmap": {
+            "Returns": "boolean",
+            "Arguments": "akUnknown; akBitmapOut: TBitmap",
+            "Description": "Modifies akBitmapOut to contain the DDS information sourced from the resource akUnknown."
+        }
+    },
+    "Script Structure": {
+        "Description": "Describes the structure of a script and its main functions."
+    },
+    "Base Script Functions": {
+        "Initialize": {
+            "Description": "Called when the script starts. Useful to initialize variables."
+        },
+        "Process": {
+            "Description": "Called for every record selected in the TES5Edit tree."
+        },
+        "Finalize": {
+            "Description": "Called when the script has finished processing every record."
+        }
+    },
+    "Hotkeys": {
+        "Description": "TES5Edit can assign hotkeys to scripts. The script hotkey is defined in the description."
+    },
+    "Script References": {
+        "Description": "Scripts can use functions defined in other scripts using the 'uses' keyword."
+    },
+    "Script User Interface": {
+        "AddMessage": {
+            "Description": "Pushes a line to TES5Edit's Information tab."
+        },
+        "InputQuery": {
+            "Description": "Displays a prompt dialog; returns False if the user clicked Cancel or X, or True otherwise."
+        },
+        "SelectDirectory": {
+            "Description": "Returns a path as a string; used in 'Assets browser.pas'."
+        },
+        "ShellExecute": {
+            "Description": "Used to call another program."
+        },
+        "TCheckListBox": {
+            "Description": "Used in 'Copy as override.pas'."
+        },
+        "TListView": {
+            "Description": "Used in 'Assets browser.pas'."
+        },
+        "TMemo": {
+            "Description": "Used in 'Assets browser.pas'."
+        },
+        "TMenuItem": {
+            "Description": "Used in 'Assets browser.pas'."
+        },
+        "TPopupMenu": {
+            "Description": "Used in 'Assets browser.pas'."
+        },
+        "TSaveDialog": {
+            "Description": "Used in 'Assets browser.pas'."
+        },
+        "TScrollBox": {
+            "Description": "Used in 'ExportImportTexts.pas'."
+        }
+    },
+    "Simple Script Sample": {
+        "Description": "A sample script that exports the FormID and EditorID of selected NPCs to a TXT file.",
+        "Sample Code": [
+            "// This is the unit name that will contain all the script functions",
+            "unit ExportScripts;",
+            "// Global variables",
+            "var NPCList: TStringList;",
+            "// Called when the script starts",
+            "function Initialize: integer;",
+            "begin",
+            "    NPCList := TStringList.Create;",
+            "    NPCList.Add('FormID;EditorID');",
+            "end;",
+            "// Called for each selected record in the TES5Edit tree",
+            "function Process(e: IInterface): integer;",
+            "begin",
+            "    if Signature(e) <> 'NPC_' then exit;",
+            "    NPCList.Add(IntToHex(FixedFormID(e), 8) + ';' + GetElementEditValues(e, 'EDID'));",
+            "end;",
+            "// Called after the script has finished processing every record",
+            "function Finalize: integer;",
+            "var filename: string;",
+            "begin",
+            "    filename := ProgramPath + 'Edit Scripts\\NPCs.txt';",
+            "    AddMessage('Saving NPC list to ' + filename);",
+            "    NPCList.SaveToFile(filename);",
+            "    NPCList.Free;",
+            "end;",
+            "end."
+        ]
+    },
+    "xEdit Extensions": {
+        "Controls": [
+            "akLeft",
+            "akRight",
+            "akTop",
+            "akBottom"
+        ],
+        "FileCtrl": [
+            "function SelectDirectory"
+        ],
+        "Forms": [
+            "pmAuto",
+            "pmExplicit",
+            "pmNone",
+            "poMainFormCenter"
+        ],
+        "Math": [
+            "function Ceil",
+            "function Floor",
+            "function IntPower",
+            "function Max",
+            "function Min",
+            "function Power"
+        ],
+        "Menus": [
+            "maAutomatic",
+            "maManual"
+        ],
+        "ShellApi": [
+            "function ShellExecute",
+            "function ShellExecuteWait"
+        ],
+        "System": [
+            "function StringOfChar",
+            "MaxInt",
+            "MinInt"
+        ],
+        "SysUtils": [
+            "function Dec",
+            "function DirectoryExists",
+            "function ExcludeTrailingBackslash",
+            "function FileExists",
+            "function ForceDirectories",
+            "function Frac",
+            "function Inc",
+            "function IncludeTrailingBackslash",
+            "function Int",
+            "function IntToHex64",
+            "function Pred",
+            "function SameText",
+            "function StringReplace",
+            "function StrToInt64",
+            "function StrToInt64Def",
+            "function StrToFloatDef",
+            "function Succ",
+            "LowInteger",
+            "HighInteger",
+            "cbChecked",
+            "cbGrayed",
+            "cbUnchecked",
+            "fmCreate",
+            "lpAbove",
+            "lpBelow",
+            "lpLeft",
+            "lpRight",
+            "rfReplaceAll",
+            "rfIgnoreCase"
+        ],
+        "Windows": [
+            "function CopyFile",
+            "function CreateProcessWait",
+            "function Sleep",
+            "SW_HIDE",
+            "SW_MAXIMIZE",
+            "SW_MINIMIZE",
+            "SW_RESTORE",
+            "SW_SHOW",
+            "SW_SHOWDEFAULT",
+            "SW_SHOWMAXIMIZED",
+            "SW_SHOWMINIMIZED",
+            "SW_SHOWMINNOACTIVE",
+            "SW_SHOWNA",
+            "SW_SHOWNOACTIVATE",
+            "SW_SHOWNORMAL"
+        ],
+        "Classes": [
+            "TBinaryReader",
+            "TBinaryWriter",
+            "TBitmap",
+            "TBoundLabel",
+            "TBytesStream",
+            "TCheckListBox",
+            "TComboBox",
+            "TCustomForm",
+            "TCustomIniFile",
+            "TCustomLabeledEdit",
+            "THashedStringList",
+            "TLabeledEdit",
+            "TListItem",
+            "TListItems",
+            "TListView",
+            "TIniFile",
+            "TMemIniFile",
+            "TMenu",
+            "TMenuItem",
+            "TPerlRegex",
+            "TPerlRegexOptions",
+            "TRegistryIniFile",
+            "TStrings",
+            "TStringList",
+            "TWinControl"
+        ]
+    },
+    "Unsupported Language Features": {
+        "anonymous methods": "Refer to the Embarcadero documentation.",
+        "array arguments": "A function cannot accept an argument with a type like array of integer.",
+        "function overloading": "Allows the same function to have multiple sets of arguments.",
+        "object types": "The object keyword isn't implemented.",
+        "out parameters": "Out parameters always receive default values. Use var parameters instead.",
+        "procedural types": "Refer to the Embarcadero documentation.",
+        "structured types": "Refer to the Embarcadero documentation.",
+        "subclasses": "The constructor keyword isn't implemented. Subclasses without a constructor can be defined, but attempts to instantiate them will always break.",
+        "try": "Doesn't catch all runtime errors."
+    },
+    "Unsupported Operators": {
+        "&": "Prefix; suppresses parsing of a keyword.",
+        "@": "Prefix; retrieves the address of a variable for use as a pointer.",
+        "^": "Dereferences a pointer.",
+        "<<": "Used for bit shifting, but returns a junk result in xEdit. Use Shl instead.",
+        ">>": "Used for bit shifting, but returns a junk result in xEdit. Use Shr instead."
+    },
+    "Unsupported Keywords": {
+        "absolute": "Allows two or more variables to occupy the same location in memory.",
+        "as": "Used to cast a variable to a given class.",
+        "constructor": "Used to declare a constructor function for subclasses.",
+        "in": "Used in expressions like myChar in ['a','b'].",
+        "is": "Used to test whether a variable is an instance of a given class.",
+        "object": "Used to create object types.",
+        "type": "Partial implementation. You can use it to alias a class name, but it's broken for other uses.",
+        "with": "Statement."
+    },
+    "Unsupported Classes and Tools": {
+        "Variant support routines": "Makes it easier to identify a variant's current type, and cast variants.",
+        "Move": "This function is supposed to copy data from one memory location to another but is unsupported."
+    }
+}
